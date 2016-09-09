@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Opus File Converter (opusFC) Documentation &#8212; opusFC 1.0.0b1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0b1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="opusFC 1.0.0b1 documentation" href="#" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="opus-file-converter-opusfc-documentation">
+<h1>Opus File Converter (opusFC) Documentation<a class="headerlink" href="#opus-file-converter-opusfc-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The opusFC module converts binary OPUS files into NumPy arrays. It is primarily
+intended to be used with the <a class="reference external" href="https://github.com/markotoplak/orange-infrared">orange-infrared</a> add-on for the <a class="reference external" href="http://orange.biolab.si/">Orange3</a> Data Mining suite.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>To determine the contents of a file:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">opusfile</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">dbs</span> <span class="o">=</span> <span class="n">opusFC</span><span class="o">.</span><span class="n">listContents</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dbs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Load the first datablock in <code class="docutils literal"><span class="pre">dbs</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">opusFC</span><span class="o">.</span><span class="n">getOpusData</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dbs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Access loaded data and parameters:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">x</span>                    <span class="c1"># X coordinates</span>
+<span class="n">data</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;SNM&#39;</span><span class="p">]</span>    <span class="c1"># Sample name</span>
+<span class="n">data</span><span class="o">.</span><span class="n">description</span>          <span class="c1"># Description of data object</span>
+<span class="n">data</span><span class="o">.</span><span class="n">paramDict</span><span class="p">[</span><span class="s1">&#39;SNM&#39;</span><span class="p">]</span>     <span class="c1"># String description of SNM</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>opusFC is distributed as a compiled python/cython module only. Feedback, bug reports,
+and other contributions are welcomed at the <a class="reference external" href="https://github.com/stuart-cls/python-opusfc-dist">python-opusfc-dist</a> github repo or by
+contacting the authors directly.</p>
+</div>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>opusFC is written by Mike Richards and Stuart Read for the <a class="reference external" href="http://midir.lightsource.ca">Mid-IR beamline</a> at the
+<a class="reference external" href="http://www.lightsource.ca">Canadian Light Source Inc.</a></p>
+</div>
+</div>
+<div class="section" id="module-opusFC">
+<span id="reference"></span><h1>Reference<a class="headerlink" href="#module-opusFC" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="opusFC.DataReturn">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">DataReturn</code><a class="headerlink" href="#opusFC.DataReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data object returned by .getOpusData().</p>
+<p>Attributes will depend on thee requested datablock and can be one of 2D, 3D or 3DTRC:</p>
+<blockquote>
+<div><ul class="simple">
+<li>2D - Single spectrum</li>
+<li>3D - Hyperspectral cube of image/map data</li>
+<li>3DTRC - Map(s) of a single spectral feature/integral/calculation</li>
+</ul>
+</div></blockquote>
+<dl class="attribute">
+<dt id="opusFC.DataReturn.dataType">
+<code class="descname">dataType</code><a class="headerlink" href="#opusFC.DataReturn.dataType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The datablock type</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.dimension">
+<code class="descname">dimension</code><a class="headerlink" href="#opusFC.DataReturn.dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock dimensions (2D or 3D)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.derivative">
+<code class="descname">derivative</code><a class="headerlink" href="#opusFC.DataReturn.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock derivative (NONE, 1DER, 2DER, NDER)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.description">
+<code class="descname">description</code><a class="headerlink" href="#opusFC.DataReturn.description" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Description of the :class:DataReturn object
+attributes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#opusFC.DataReturn.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> &#8211; Dictionary of relevant data/sample/instrument parameters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.x">
+<code class="descname">x</code><a class="headerlink" href="#opusFC.DataReturn.x" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ndarray</em> &#8211; 1D numpy array of spectrum x coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#opusFC.DataReturn.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Maximum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.minY">
+<code class="descname">minY</code><a class="headerlink" href="#opusFC.DataReturn.minY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Minimum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.y">
+<code class="descname">y</code><a class="headerlink" href="#opusFC.DataReturn.y" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 2D &#8211; 1D numpy array of y values</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.mapX">
+<code class="descname">mapX</code><a class="headerlink" href="#opusFC.DataReturn.mapX" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 3D &#8211; 1D numpy array of X map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.mapY">
+<code class="descname">mapY</code><a class="headerlink" href="#opusFC.DataReturn.mapY" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 3D &#8211; 1D numpy array of Y map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.spectra">
+<code class="descname">spectra</code><a class="headerlink" href="#opusFC.DataReturn.spectra" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 3D &#8211; 3D numpy array of spectral maps
+dataObject.spectra[row][column][x]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.labels">
+<code class="descname">labels</code><a class="headerlink" href="#opusFC.DataReturn.labels" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">str</span></code>, 3DTRC &#8211; List of trace block names</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.DataReturn.traces">
+<code class="descname">traces</code><a class="headerlink" href="#opusFC.DataReturn.traces" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 3DTRC &#8211; 3D numpy array of trace maps with same index as labels: dataObject.traces[:,:,index]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="opusFC.getOpusData">
+<code class="descclassname">opusFC.</code><code class="descname">getOpusData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opusFC.getOpusData" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns a <a class="reference internal" href="#opusFC.DataReturn" title="opusFC.DataReturn"><code class="xref py py-obj docutils literal"><span class="pre">DataReturn</span></code></a> object containing the data and
+data parameters for     the specified datablock in the given file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>path</strong> (<em>path</em>) &#8211; Path to file</li>
+<li><strong>datablock</strong> (<em>tuple of str</em>) &#8211; tuple(datablocktype, dimensions, derivative)
+as returned by .listContents()</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Object containing the requested data and associated
+parameters. Data structure is as specified in data.description and
+can be one of the three types described in <a class="reference internal" href="#opusFC.DataReturn" title="opusFC.DataReturn"><code class="xref py py-class docutils literal"><span class="pre">DataReturn</span></code></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#opusFC.DataReturn" title="opusFC.DataReturn"><code class="xref py py-obj docutils literal"><span class="pre">DataReturn</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="opusFC.help">
+<code class="descclassname">opusFC.</code><code class="descname">help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opusFC.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a help message containing the available functions.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="opusFC.isOpusFile">
+<code class="descclassname">opusFC.</code><code class="descname">isOpusFile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opusFC.isOpusFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests if the given file is an OPUS data file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<em>path</em>) &#8211; Path to file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if an OPUS file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="opusFC.listContents">
+<code class="descclassname">opusFC.</code><code class="descname">listContents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opusFC.listContents" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function returns a list of datablocks for a given file.
+Each datablock is identified by blocktype, dimensions and derivative.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<em>path</em>) &#8211; Path to file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>list of tuple</strong> &#8211; List containing a (datablocktype, dimensions, derivative) tuple
+for each datablock in the file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str, str, str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Opus File Converter (opusFC) Documentation</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#contributing">Contributing</a></li>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-opusFC">Reference</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Stuart Read / Canadian Light Source Inc..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
