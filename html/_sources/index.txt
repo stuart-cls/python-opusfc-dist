@@ -56,7 +56,7 @@ contacting the authors directly.
 Authors
 -------
 
-opusFC is written by Mike Richards and Stuart Read for the `Mid-IR beamline`_ at the
+opusFC is written by Stuart Read and Mike Richards for the `Mid-IR beamline`_ at the
 `Canadian Light Source Inc.`_
 
 .. _`Mid-IR beamline`: http://midir.lightsource.ca

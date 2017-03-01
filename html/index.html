@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Opus File Converter (opusFC) Documentation &#8212; opusFC 1.0.0b1 documentation</title>
+    <title>Opus File Converter (opusFC) Documentation &#8212; opusFC 1.1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.0b1',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="opusFC 1.0.0b1 documentation" href="#" />
+    <link rel="top" title="opusFC 1.1.0 documentation" href="#" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -76,108 +76,642 @@ contacting the authors directly.</p>
 </div>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>opusFC is written by Mike Richards and Stuart Read for the <a class="reference external" href="http://midir.lightsource.ca">Mid-IR beamline</a> at the
+<p>opusFC is written by Stuart Read and Mike Richards for the <a class="reference external" href="http://midir.lightsource.ca">Mid-IR beamline</a> at the
 <a class="reference external" href="http://www.lightsource.ca">Canadian Light Source Inc.</a></p>
 </div>
 </div>
 <div class="section" id="module-opusFC">
 <span id="reference"></span><h1>Reference<a class="headerlink" href="#module-opusFC" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="opusFC.DataReturn">
-<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">DataReturn</code><a class="headerlink" href="#opusFC.DataReturn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Data object returned by .getOpusData().</p>
-<p>Attributes will depend on thee requested datablock and can be one of 2D, 3D or 3DTRC:</p>
-<blockquote>
-<div><ul class="simple">
-<li>2D - Single spectrum</li>
-<li>3D - Hyperspectral cube of image/map data</li>
-<li>3DTRC - Map(s) of a single spectral feature/integral/calculation</li>
-</ul>
-</div></blockquote>
+<dt id="opusFC.BaseDataReturn">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">BaseDataReturn</code><a class="headerlink" href="#opusFC.BaseDataReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for data object returned by .getOpusData().</p>
 <dl class="attribute">
-<dt id="opusFC.DataReturn.dataType">
-<code class="descname">dataType</code><a class="headerlink" href="#opusFC.DataReturn.dataType" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str</em> &#8211; The datablock type</p>
+<dt id="opusFC.BaseDataReturn.description">
+<code class="descname">description</code><a class="headerlink" href="#opusFC.BaseDataReturn.description" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Description of the data object attributes</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.dimension">
-<code class="descname">dimension</code><a class="headerlink" href="#opusFC.DataReturn.dimension" title="Permalink to this definition">¶</a></dt>
+<dt id="opusFC.BaseDataReturn.dimension">
+<code class="descname">dimension</code><a class="headerlink" href="#opusFC.BaseDataReturn.dimension" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>str</em> &#8211; Datablock dimensions (2D or 3D)</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.derivative">
-<code class="descname">derivative</code><a class="headerlink" href="#opusFC.DataReturn.derivative" title="Permalink to this definition">¶</a></dt>
+<dt id="opusFC.BaseDataReturn.dataType">
+<code class="descname">dataType</code><a class="headerlink" href="#opusFC.BaseDataReturn.dataType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The datablock type (AB, TR, SSC, etc)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.BaseDataReturn.derivative">
+<code class="descname">derivative</code><a class="headerlink" href="#opusFC.BaseDataReturn.derivative" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>str</em> &#8211; Datablock derivative (NONE, 1DER, 2DER, NDER)</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.description">
-<code class="descname">description</code><a class="headerlink" href="#opusFC.DataReturn.description" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str</em> &#8211; Description of the :class:DataReturn object
-attributes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="opusFC.DataReturn.parameters">
-<code class="descname">parameters</code><a class="headerlink" href="#opusFC.DataReturn.parameters" title="Permalink to this definition">¶</a></dt>
+<dt id="opusFC.BaseDataReturn.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#opusFC.BaseDataReturn.parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>dict</em> &#8211; Dictionary of relevant data/sample/instrument parameters</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.x">
-<code class="descname">x</code><a class="headerlink" href="#opusFC.DataReturn.x" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>ndarray</em> &#8211; 1D numpy array of spectrum x coordinates</p>
+<dt id="opusFC.BaseDataReturn.x">
+<code class="descname">x</code><a class="headerlink" href="#opusFC.BaseDataReturn.x" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of spectrum x coordinates</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.maxY">
-<code class="descname">maxY</code><a class="headerlink" href="#opusFC.DataReturn.maxY" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em> &#8211; Maximum y value</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="opusFC.DataReturn.minY">
-<code class="descname">minY</code><a class="headerlink" href="#opusFC.DataReturn.minY" title="Permalink to this definition">¶</a></dt>
+<dt id="opusFC.BaseDataReturn.minY">
+<code class="descname">minY</code><a class="headerlink" href="#opusFC.BaseDataReturn.minY" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>float</em> &#8211; Minimum y value</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.y">
-<code class="descname">y</code><a class="headerlink" href="#opusFC.DataReturn.y" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 2D &#8211; 1D numpy array of y values</p>
+<dt id="opusFC.BaseDataReturn.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#opusFC.BaseDataReturn.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Maximum y value</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opusFC.ImageDataReturn">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">ImageDataReturn</code><a class="headerlink" href="#opusFC.ImageDataReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hyperspectral data object returned by .getOpusData() for 3D image datablocks.</p>
+<dl class="attribute">
+<dt id="opusFC.ImageDataReturn.description">
+<code class="descname">description</code><a class="headerlink" href="#opusFC.ImageDataReturn.description" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Description of the data object attributes</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.mapX">
-<code class="descname">mapX</code><a class="headerlink" href="#opusFC.DataReturn.mapX" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 3D &#8211; 1D numpy array of X map coordinates</p>
+<dt id="opusFC.ImageDataReturn.dimension">
+<code class="descname">dimension</code><a class="headerlink" href="#opusFC.ImageDataReturn.dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock dimensions (2D or 3D)</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.mapY">
-<code class="descname">mapY</code><a class="headerlink" href="#opusFC.DataReturn.mapY" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 3D &#8211; 1D numpy array of Y map coordinates</p>
+<dt id="opusFC.ImageDataReturn.dataType">
+<code class="descname">dataType</code><a class="headerlink" href="#opusFC.ImageDataReturn.dataType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The datablock type (AB, TR, SSC, etc)</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.spectra">
-<code class="descname">spectra</code><a class="headerlink" href="#opusFC.DataReturn.spectra" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 3D &#8211; 3D numpy array of spectral maps
+<dt id="opusFC.ImageDataReturn.derivative">
+<code class="descname">derivative</code><a class="headerlink" href="#opusFC.ImageDataReturn.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock derivative (NONE, 1DER, 2DER, NDER)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageDataReturn.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#opusFC.ImageDataReturn.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> &#8211; Dictionary of relevant data/sample/instrument parameters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageDataReturn.x">
+<code class="descname">x</code><a class="headerlink" href="#opusFC.ImageDataReturn.x" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of spectrum x coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageDataReturn.minY">
+<code class="descname">minY</code><a class="headerlink" href="#opusFC.ImageDataReturn.minY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Minimum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageDataReturn.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#opusFC.ImageDataReturn.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Maximum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageDataReturn.mapX">
+<code class="descname">mapX</code><a class="headerlink" href="#opusFC.ImageDataReturn.mapX" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of X map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageDataReturn.mapY">
+<code class="descname">mapY</code><a class="headerlink" href="#opusFC.ImageDataReturn.mapY" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of Y map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageDataReturn.spectra">
+<code class="descname">spectra</code><a class="headerlink" href="#opusFC.ImageDataReturn.spectra" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 3D numpy array of spectral maps
 dataObject.spectra[row][column][x]</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="opusFC.ImageTRCDataReturn">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">ImageTRCDataReturn</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map(s) of a single spectral feature/integral/calculation returned by
+.getOpusData() for 3D image TRC datablocks.</p>
 <dl class="attribute">
-<dt id="opusFC.DataReturn.labels">
-<code class="descname">labels</code><a class="headerlink" href="#opusFC.DataReturn.labels" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">str</span></code>, 3DTRC &#8211; List of trace block names</p>
+<dt id="opusFC.ImageTRCDataReturn.description">
+<code class="descname">description</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.description" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Description of the data object attributes</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="opusFC.DataReturn.traces">
-<code class="descname">traces</code><a class="headerlink" href="#opusFC.DataReturn.traces" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code>, 3DTRC &#8211; 3D numpy array of trace maps with same index as labels: dataObject.traces[:,:,index]</p>
+<dt id="opusFC.ImageTRCDataReturn.dimension">
+<code class="descname">dimension</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock dimensions (2D or 3D)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.dataType">
+<code class="descname">dataType</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.dataType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The datablock type (AB, TR, SSC, etc)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.derivative">
+<code class="descname">derivative</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock derivative (NONE, 1DER, 2DER, NDER)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> &#8211; Dictionary of relevant data/sample/instrument parameters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.x">
+<code class="descname">x</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.x" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of spectrum x coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.minY">
+<code class="descname">minY</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.minY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Minimum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Maximum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.mapX">
+<code class="descname">mapX</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.mapX" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of X map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.mapY">
+<code class="descname">mapY</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.mapY" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of Y map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.labels">
+<code class="descname">labels</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.labels" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">str</span></code> &#8211; List of trace block names</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.ImageTRCDataReturn.traces">
+<code class="descname">traces</code><a class="headerlink" href="#opusFC.ImageTRCDataReturn.traces" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 3D numpy array of trace maps with
+same index as labels:
+dataObject.traces[:,:,index]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opusFC.MultiRegionDataReturn">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">MultiRegionDataReturn</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hyperspectral multiregion point map(s) returned by .getOpusData() for
+multiregion 3D point mapping datablocks.</p>
+<p>Maps are _not_ guaranteed to be perfect XY grids and so spectral coordinates
+cannot be specfied by origin point and dx/dy values as in :class:ImageDataReturn.</p>
+<dl class="attribute">
+<dt id="opusFC.MultiRegionDataReturn.description">
+<code class="descname">description</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn.description" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Description of the data object attributes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionDataReturn.dimension">
+<code class="descname">dimension</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn.dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock dimensions (2D or 3D)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionDataReturn.dataType">
+<code class="descname">dataType</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn.dataType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The datablock type (AB, TR, SSC, etc)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionDataReturn.derivative">
+<code class="descname">derivative</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock derivative (NONE, 1DER, 2DER, NDER)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionDataReturn.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> &#8211; Dictionary of relevant data/sample/instrument parameters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionDataReturn.x">
+<code class="descname">x</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn.x" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of spectrum x coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionDataReturn.minY">
+<code class="descname">minY</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn.minY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Minimum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionDataReturn.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Maximum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionDataReturn.regions">
+<code class="descname">regions</code><a class="headerlink" href="#opusFC.MultiRegionDataReturn.regions" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <a class="reference internal" href="#opusFC.Region" title="opusFC.Region"><code class="xref py py-obj docutils literal"><span class="pre">Region</span></code></a> &#8211; List of regions.
+Each region is a :class:Region containing</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">regions[0].title</code></dt>
+<dd><p><em>str</em> &#8211; description of region</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">regions[0].mapX</code></dt>
+<dd><p><em>ndarray</em> &#8211; 1D numpy array of X map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">regions[0].mapY</code></dt>
+<dd><p><em>ndarray</em> &#8211; 1D numpy array of Y map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">regions[0].start_time</code></dt>
+<dd><p><em>ndarray</em> &#8211; timestamps of spectrum acquisition array</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">regions[0].spectra</code></dt>
+<dd><p><em>ndarray</em> &#8211; 2D numpy array of of spectra in the region:
+returnedObject.regions[region index].spectra[row]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opusFC.MultiRegionTRCDataReturn">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">MultiRegionTRCDataReturn</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hyperspectral multiregion point map(s) returned by .getOpusData() for
+multiregion 3D point mapping datablocks.</p>
+<p>Maps are _not_ guaranteed to be perfect XY grids and so spectral coordinates
+cannot be specfied by origin point and dx/dy values as in :class:ImageDataReturn.</p>
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.description">
+<code class="descname">description</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.description" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Description of the data object attributes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.dimension">
+<code class="descname">dimension</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock dimensions (2D or 3D)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.dataType">
+<code class="descname">dataType</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.dataType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The datablock type (AB, TR, SSC, etc)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.derivative">
+<code class="descname">derivative</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock derivative (NONE, 1DER, 2DER, NDER)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> &#8211; Dictionary of relevant data/sample/instrument parameters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.x">
+<code class="descname">x</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.x" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of spectrum x coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.minY">
+<code class="descname">minY</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.minY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Minimum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Maximum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.labels">
+<code class="descname">labels</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.labels" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">str</span></code> &#8211; List of trace block names</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.MultiRegionTRCDataReturn.regions">
+<code class="descname">regions</code><a class="headerlink" href="#opusFC.MultiRegionTRCDataReturn.regions" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <a class="reference internal" href="#opusFC.Region" title="opusFC.Region"><code class="xref py py-obj docutils literal"><span class="pre">Region</span></code></a> &#8211; List of regions.
+Each region is a :class:Region containing</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">regions[0].title</code></dt>
+<dd><p><em>str</em> &#8211; description of region</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">regions[0].mapX</code></dt>
+<dd><p><em>ndarray</em> &#8211; 1D numpy array of X map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">regions[0].mapY</code></dt>
+<dd><p><em>ndarray</em> &#8211; 1D numpy array of Y map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">regions[0].spectra</code></dt>
+<dd><p><em>ndarray</em> &#8211; 2D numpy array of traces in the region:
+returnedObject.regions[region index].spectra[row]
+As with :class:ImageTRCDataReturn, the index of the
+resulting array corresponds to the .labels index</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opusFC.Region">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">Region</code><a class="headerlink" href="#opusFC.Region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returned as part of a :class:MultiRegionDataReturn.</p>
+<dl class="attribute">
+<dt id="opusFC.Region.title">
+<code class="descname">title</code><a class="headerlink" href="#opusFC.Region.title" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; description of region</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.Region.mapX">
+<code class="descname">mapX</code><a class="headerlink" href="#opusFC.Region.mapX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ndarray</em> &#8211; 1D numpy array of X map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.Region.mapY">
+<code class="descname">mapY</code><a class="headerlink" href="#opusFC.Region.mapY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ndarray</em> &#8211; 1D numpy array of Y map coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.Region.start_time">
+<code class="descname">start_time</code><a class="headerlink" href="#opusFC.Region.start_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ndarray</em> &#8211; timestamps of spectrum acquisition array</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.Region.spectra">
+<code class="descname">spectra</code><a class="headerlink" href="#opusFC.Region.spectra" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ndarray</em> &#8211; 2D numpy array of of spectra in the region:
+spectra[row]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opusFC.SingleDataReturn">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">SingleDataReturn</code><a class="headerlink" href="#opusFC.SingleDataReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Single spectrum data object returned by .getOpusData() for 2D datablocks.</p>
+<dl class="attribute">
+<dt id="opusFC.SingleDataReturn.description">
+<code class="descname">description</code><a class="headerlink" href="#opusFC.SingleDataReturn.description" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Description of the data object attributes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.SingleDataReturn.dimension">
+<code class="descname">dimension</code><a class="headerlink" href="#opusFC.SingleDataReturn.dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock dimensions (2D or 3D)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.SingleDataReturn.dataType">
+<code class="descname">dataType</code><a class="headerlink" href="#opusFC.SingleDataReturn.dataType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The datablock type (AB, TR, SSC, etc)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.SingleDataReturn.derivative">
+<code class="descname">derivative</code><a class="headerlink" href="#opusFC.SingleDataReturn.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock derivative (NONE, 1DER, 2DER, NDER)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.SingleDataReturn.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#opusFC.SingleDataReturn.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> &#8211; Dictionary of relevant data/sample/instrument parameters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.SingleDataReturn.x">
+<code class="descname">x</code><a class="headerlink" href="#opusFC.SingleDataReturn.x" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of spectrum x coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.SingleDataReturn.minY">
+<code class="descname">minY</code><a class="headerlink" href="#opusFC.SingleDataReturn.minY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Minimum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.SingleDataReturn.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#opusFC.SingleDataReturn.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Maximum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.SingleDataReturn.y">
+<code class="descname">y</code><a class="headerlink" href="#opusFC.SingleDataReturn.y" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of y values</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opusFC.TimeResolvedDataReturn">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">TimeResolvedDataReturn</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time-resolved spectra data object returned by .getOpusData() for 3D-TRS datablocks.</p>
+<p>Z Axis units are available from dataObject.parameters[&#8216;ZTX&#8217;]</p>
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.description">
+<code class="descname">description</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.description" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Description of the data object attributes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.dimension">
+<code class="descname">dimension</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock dimensions (2D or 3D)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.dataType">
+<code class="descname">dataType</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.dataType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The datablock type (AB, TR, SSC, etc)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.derivative">
+<code class="descname">derivative</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock derivative (NONE, 1DER, 2DER, NDER)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> &#8211; Dictionary of relevant data/sample/instrument parameters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.x">
+<code class="descname">x</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.x" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of spectrum x coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.minY">
+<code class="descname">minY</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.minY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Minimum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Maximum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.z">
+<code class="descname">z</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.z" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of z (time) axis coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedDataReturn.spectra">
+<code class="descname">spectra</code><a class="headerlink" href="#opusFC.TimeResolvedDataReturn.spectra" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 2D numpy array of spectral time series
+dataObject.spectra[z][x]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opusFC.TimeResolvedTRCDataReturn">
+<em class="property">class </em><code class="descclassname">opusFC.</code><code class="descname">TimeResolvedTRCDataReturn</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time-resolved trace data object returned by .getOpusData() for 3D-TRS TRC datablocks.</p>
+<p>x axis units are available from dataObject.parameters[&#8216;DXU&#8217;]</p>
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.description">
+<code class="descname">description</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.description" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Description of the data object attributes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.dimension">
+<code class="descname">dimension</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.dimension" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock dimensions (2D or 3D)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.dataType">
+<code class="descname">dataType</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.dataType" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; The datablock type (AB, TR, SSC, etc)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.derivative">
+<code class="descname">derivative</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Datablock derivative (NONE, 1DER, 2DER, NDER)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.parameters">
+<code class="descname">parameters</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> &#8211; Dictionary of relevant data/sample/instrument parameters</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.x">
+<code class="descname">x</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.x" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 1D numpy array of trace x coordinates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.minY">
+<code class="descname">minY</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.minY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Minimum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> &#8211; Maximum y value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.labels">
+<code class="descname">labels</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.labels" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">str</span></code> &#8211; List of trace names</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="opusFC.TimeResolvedTRCDataReturn.traces">
+<code class="descname">traces</code><a class="headerlink" href="#opusFC.TimeResolvedTRCDataReturn.traces" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code> &#8211; 2D numpy array of traces with
+same index as labels:
+dataObject.traces[index]</p>
 </dd></dl>
 
 </dd></dl>
@@ -185,8 +719,8 @@ dataObject.spectra[row][column][x]</p>
 <dl class="function">
 <dt id="opusFC.getOpusData">
 <code class="descclassname">opusFC.</code><code class="descname">getOpusData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#opusFC.getOpusData" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function returns a <a class="reference internal" href="#opusFC.DataReturn" title="opusFC.DataReturn"><code class="xref py py-obj docutils literal"><span class="pre">DataReturn</span></code></a> object containing the data and
-data parameters for     the specified datablock in the given file.</p>
+<dd><p>This function returns a <code class="xref py py-obj docutils literal"><span class="pre">DataReturn</span></code> object containing the data and
+data parameters for    the specified datablock in the given file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -200,10 +734,10 @@ as returned by .listContents()</li>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Object containing the requested data and associated
 parameters. Data structure is as specified in data.description and
-can be one of the three types described in <a class="reference internal" href="#opusFC.DataReturn" title="opusFC.DataReturn"><code class="xref py py-class docutils literal"><span class="pre">DataReturn</span></code></a></p>
+can be one of the three types described in <code class="xref py py-class docutils literal"><span class="pre">DataReturn</span></code></p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#opusFC.DataReturn" title="opusFC.DataReturn"><code class="xref py py-obj docutils literal"><span class="pre">DataReturn</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-obj docutils literal"><span class="pre">DataReturn</span></code></p>
 </td>
 </tr>
 </tbody>
@@ -311,7 +845,7 @@ for each datablock in the file</td>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, Stuart Read / Canadian Light Source Inc..
+      &copy;2017, Stuart Read / Canadian Light Source Inc..
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.6</a>

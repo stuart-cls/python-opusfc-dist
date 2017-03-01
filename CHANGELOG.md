@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and
 and [human-readable changelog](http://keepachangelog.com/).
 
+## [1.1.0] - 2017-03-01
+The 3D blocks that aren't hyperspectral cubes release.
+
+### Added
+ - Support for 3D-MAP multiregion arbitrary map files
+ - Support for 3D-TRS Time-resolved spectra files
+
+### Changed
+ - Object returned by `.getOpusData` is now a DataReturn class specific to that
+   data type. This allows consumers to easily determine data structure using
+   `type(dataObject)` instead of guessing. Object structure for previously
+   supported files remains the same, so should be backwards compatible.
+
+### Fixed
+ - `TRARI` blocks are no longer mis-identified as `TRC` blocks by `.listContents`
+
 ## [1.0.0b1] - 2016-09-08
 First pypi.org release.
 
