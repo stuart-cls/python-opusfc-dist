@@ -1,0 +1,77 @@
+.. opusFC documentation master file, created by
+   sphinx-quickstart on Tue Aug 23 16:00:09 2016.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Opus File Converter (opusFC) Documentation
+==========================================
+
+.. toctree::
+   :maxdepth: 2
+
+Introduction
+------------
+
+The opusFC module converts binary OPUS files into NumPy arrays. It is primarily
+intended to be used with the orange-spectroscopy_ add-on for the Orange3_ Data Mining suite.
+
+.. _orange-spectroscopy: https://github.com/markotoplak/orange-spectroscopy
+.. _Orange3: http://orange.biolab.si/
+
+Usage
+-----
+
+To determine the contents of a file:
+
+.. code:: python
+
+    f = /path/to/opusfile.0
+    dbs = opusFC.listContents(f)
+    print(dbs)
+
+Load the first datablock in ``dbs``:
+
+.. code:: python
+
+    data = opusFC.getOpusData(f, dbs[0])
+
+Access loaded data and parameters:
+
+.. code:: python
+
+    data.x                    # X coordinates
+    data.parameters['SNM']    # Sample name
+    data.description          # Description of data object
+    data.paramDict['SNM']     # String description of SNM
+
+Contributing
+------------
+
+opusFC is distributed as a compiled python/cython module only. Feedback, bug reports,
+and other contributions are welcomed at the python-opusfc-dist_ github repo or by
+contacting the authors directly.
+
+.. _python-opusfc-dist: https://github.com/stuart-cls/python-opusfc-dist
+
+Authors
+-------
+
+opusFC is written by Stuart Read and Mike Richards for the `Mid-IR beamline`_ at the
+`Canadian Light Source Inc.`_
+
+.. _`Mid-IR beamline`: http://midir.lightsource.ca
+.. _`Canadian Light Source Inc.`: http://www.lightsource.ca
+
+Reference
+=========
+
+.. automodule:: opusFC
+    :members:
+    :undoc-members:
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

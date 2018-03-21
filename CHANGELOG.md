@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and
 and [human-readable changelog](http://keepachangelog.com/).
 
+## [1.1.1] - 2018-03-21
+
+### Fixed
+ - Fix datablock list generation for extra-large 3D Image files
+   *NOTE:* This filetype cannot be opened in 32-bit Windows builds
+ - 3D-MAP multiregion arbitrary map files (`MultiRegionDataReturn`) which contain
+   point groups where the points are arbitrary locations (not a grid or a linescan)
+   are now properly loaded
+   - Multiregion: handle non-standard point group ordering
+   - Multiregion: handle annotations for files with multiple visible images
+
 ## [1.1.0] - 2017-03-01
 The 3D blocks that aren't hyperspectral cubes release.
 
