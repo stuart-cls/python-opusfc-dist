@@ -13,8 +13,10 @@ Introduction
 ------------
 
 The opusFC module converts binary OPUS files into NumPy arrays. It is primarily
-intended to be used with the orange-spectroscopy_ add-on for the Orange3_ Data Mining suite.
+intended to be used with Quasar_ as part of the orange-spectroscopy_ add-on for
+the Orange3_ Data Mining suite.
 
+.. _Quasar: https://quasar.codes/
 .. _orange-spectroscopy: https://github.com/markotoplak/orange-spectroscopy
 .. _Orange3: http://orange.biolab.si/
 
@@ -42,7 +44,22 @@ Access loaded data and parameters:
     data.x                    # X coordinates
     data.parameters['SNM']    # Sample name
     data.description          # Description of data object
-    data.paramDict['SNM']     # String description of SNM
+    opusFC.paramDict['SNM']     # String description of SNM
+
+Access and save visible images:
+
+.. code:: python
+
+    images = opusFC.getVisImages(f)
+
+    for img in images:
+        data = img['image']
+        title = img['Title']
+        imgext = img['imgext']
+        f = "{0}_{1}.{2}".format(f, title, imgext)
+        with open(f, 'wb') as fd:
+            fd.write(data)
+
 
 Contributing
 ------------

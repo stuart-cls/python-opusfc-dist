@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and
 and [human-readable changelog](http://keepachangelog.com/).
 
+## [1.2.0] - 2019-04-04
+The I can see clearly now release.
+
+### Added
+ - Visible images can now be extracted with `getVisImages`.
+
+### Changed
+ - Documentation now hosted at https://stuart-cls.github.io/python-opusfc-dist/
+
+### Removed
+ - Python 2.7, 3.4 builds
+
+### Fixed
+ - 3D-TRS (time-resolved) files without "Z Axis Label" parameter can now be loaded.
+ - Loading issue for some processed 3D-IMAGE files.
+
 ## [1.1.2] - 2018-10-10
 
 ### Added
