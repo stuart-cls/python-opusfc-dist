@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and
 and [human-readable changelog](http://keepachangelog.com/).
 
+## [1.2.1] - 2020-09-28
+
+### Added
+ - Python 3.8 builds
+
+### Removed
+ - Python 3.5 builds
+
+### Fixed
+ - Visible image extraction for files with lots of visible images
+ - Accept more string encodings, best effort on fail
+
 ## [1.2.0] - 2019-04-04
 The I can see clearly now release.
 
