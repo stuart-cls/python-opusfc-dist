@@ -3,6 +3,23 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and
 and [human-readable changelog](http://keepachangelog.com/).
 
+## [1.2.3] - 2021-07-13
+Build updates.
+
+### Added
+ - Python 3.9 builds
+
+### Changed
+ - manylinux wheels now support manylinux1, manylinux2010, manylinux2_5, manylinux2_12
+
+### Removed
+ - manylinux_i686 wheels no longer published.
+
+## [1.2.2] - 2020-12-09 py3.8-win64 only
+
+### Fixed
+ - Add annotation data type 1002
+
 ## [1.2.1] - 2020-09-28
 
 ### Added
