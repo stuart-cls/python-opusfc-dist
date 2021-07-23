@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and
 and [human-readable changelog](http://keepachangelog.com/).
 
+## [1.2.4] - 2021-07-23
+
+## Added
+ - Optics parameters in .parameters dict
+
+### Fixed
+ - More flexible with string annotation data types
+ - Visible image extraction bug
+
+### Changed
+ - Emits RuntimeWarning instead of raising a ValueError if annotation data type not known
+
 ## [1.2.3] - 2021-07-13
 Build updates.
 
