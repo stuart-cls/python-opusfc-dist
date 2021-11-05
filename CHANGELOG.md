@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and
 and [human-readable changelog](http://keepachangelog.com/).
 
+## [1.2.5] - 2021-11-05
+
+### Fixed
+ - Work around for files with un-annotated visible images
+ - Work around for files with visible image directory errors
+
 ## [1.2.4] - 2021-07-23
 
 ## Added
