@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and
 and [human-readable changelog](http://keepachangelog.com/).
 
+## [1.3.0] - 2022-04-13
+
+### Added
+ - Support for dual-channel files
+ - OpusDict() which returns a comprehensive parameter key -> lower_case_string dictionary (courtesy Jacob Filik)
+   - Leaving paramDict() for backwards compatibility
+
+### Removed
+ - Python 3.6 builds
+
+## [1.2.6] - 2022-02-10
+
+### Added
+ - Python 3.10 builds
+
 ## [1.2.5] - 2021-11-05
 
 ### Fixed
@@ -11,7 +26,7 @@ and [human-readable changelog](http://keepachangelog.com/).
 
 ## [1.2.4] - 2021-07-23
 
-## Added
+### Added
  - Optics parameters in .parameters dict
 
 ### Fixed
