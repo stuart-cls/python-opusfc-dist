@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and
 and [human-readable changelog](http://keepachangelog.com/).
 
+## [1.4.0] - 2024-09-26
+
+### Added
+ - Support for Numpy 2
+ - Builds for Python 3.13
+
+### Fixed
+ - Replaced `imghdr` usage
+ - `isOPUSFile()` now handles empty files properly
+
+### Removed
+ - Support for Python < 3.9
+
 ## [1.3.1] - 2024-07-04
 
 ### Fixed
